@@ -1,0 +1,24 @@
+version: 0.2
+env:
+  variables:
+    CODEARTIFACT_AUTH_TOKEN: "eyJ2ZXIiOjEsImlzdSI6MTY2Mzc2MzczNywiZW5jIjoiQTEyOEdDTSIsInRhZyI6IlpTb19TeFRKMmppN0h3YkZUZjVEbGciLCJleHAiOjE2NjM4MDY5MzcsImFsZyI6IkExMjhHQ01LVyIsIml2IjoidUxQOFBSbUtOQVFrNUZyeiJ9.W0ADEMTkVh2BpUIwPMlrJQ.jNTue_xeo40Sx98V.Uxox-2L7TgGxZt5d_psKtbEdPtXlcJjGcr73vF34tpIotHHU2DDIC2nExGcGRE_7az4rCE_jthXSQMosE_24uaNIuJ5SeBsjNd5ndX1o3BQfk3OWY1WwGQOftjceOn-dWGFgVNgjDOTXB5p3eyhJAbPTOeHY5WMoDpS83G8DIspnftdnF33OFKEVQ_-KHaIDNlovKPOnCvawOfsiPF6L76Te4-XhNfSjEpTTPANK7IDnsUlJyktppf9oOqdNVEerQkL9bpmfzY5DMWCtkQueEth-TAoPqzPPEAqwn5qrkX2BuDLgbWl9gjD9nxsYOxWW2j_gAUJD14oimepO1BWwR1DQDMOdf_M-8PJ1tlC_I5N9opfgCGyB0x7kvswps_lLMW3KwcGuuyLPBpMNzCVAHenGKAQxrh0bB7wEpPOILb-Kl-VWzSA3VCchRCjvaLM4ZoUHfy0XRXr1dBQ5lHKfQaT4Zx4XUuVS_oLfZINl0hHoc3YFz12RkthSQLTSyZ3ar6FQGeGMACu5lkhBmNj4HhU9a1o06HcqHfWkvRJ92pCNZYvrRkHdyoHlhTUPmS4OWfM3RW-PeEM5Lc3WmvCW8SsaQtqCiaIGRC6VyqIT-aGcEetxRn6WLQnL72RKXnHHiOjFzSu2Mri1gxX_DA5b9TeyE9IztheFYJSt0sbtOwaO4ZYXqTT4So2JBR_jmJDF4fY4FHM5moFfX4QZ7uOPSdJIpVguTJwDdeSpa3ZhuxsuNR_p1HxUN4CXmFlx8A8EtpzkDnG5uwiDbrrKCQO0HR42dTe5Fe2ZVu4S9b-9DgyatfY_fkdNvtQ4eFBaO5NkbUSnvbkfPq4fJcUi0lBB-R54qZnYyZkqy4nJggf5TJ1vkuopkb8InUfVf4ADNOdEF5WBLqIhEUbpDcbHtxWN6c0X_bJlijYMMC2qvzpOjuXUEVAdgUenkeo4rHwbWvSHkKShTg.WvXZSSWbqgwud9JOoOtQUg"
+phases:
+  install:
+    runtime-versions:
+      java: corretto8
+    commands:
+      - cp ./settings.xml /root/.m2/settings.xml
+  pre_build:
+    commands:
+      - apt-get update
+      - apt-get install -y jq
+      - wget http://www-eu.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+      - tar xzf apache-maven-3.5.4-bin.tar.gz
+      - ln -s apache-maven-3.5.4 maven
+  build:
+    commands:
+      - mvn clean install -DskipTests
+artifacts:
+  files:
+     - target/**/*.war
+  discard-paths: yes
