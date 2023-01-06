@@ -1,5 +1,0 @@
-1a7235e3a913a8871b9adfaf1ee1c11a0235b415: gen autoken
-
-https://sonarcloud.io
-devops-kyf1
-vprofile-repo26	
