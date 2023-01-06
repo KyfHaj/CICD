@@ -1,0 +1,5 @@
+apt update && apt install awscli -y
+cd var/lib
+aws s3 cp s3://vprofile-backup-3-10-22/jenkins_cicdjobs.tar.gz .
+tar xzvf jenkins_cicdjobs.tar.gz
+chown jenkins.jenkins jenkins -R
