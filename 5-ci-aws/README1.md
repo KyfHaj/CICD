@@ -1,0 +1,1 @@
+![img.png](terraform-on-aws-eks-main/terraform-on-aws-eks-main/01-Infrastructure-as-Code-IaC-Basics/img.png)
